@@ -4,36 +4,38 @@ import ErrorBoundary from '../components/ErrorBoundary';
 import React from "react";
 import Scroll from "../components/Scroll";
 import SearchBox from "../components/SearchBox";
-import { setSearchfield } from '../actions';
 import { connect } from 'react-redux';
+import { setSearchfield, requestRobots } from '../actions';
 
 const mapStateToProps = (state) => {
   return {
-    searchField: state.searchField,
+    error: state.requestRobots.error,
+    isPending: state.requestRobots.isPending,
+    robots: state.requestRobots.robots,
+    searchField: state.searchRobots.searchField,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    onRequestRobots: () => dispatch(requestRobots()),
     onSearchChange: (event) => dispatch(setSearchfield(event.target.value)),
   }
 }
 
 class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      robots: [],
-      // searchfield: '',
-    };
-  };
+  // constructor() {
+  //   super();
+  //   this.state = {
+  //     robots: [],
+  //     searchfield: '',
+  //   };
+  // };
   // const [robots, setRobots] = useState([]);
   // const [searchfield, setSearchfield] = useState('');
 
   componentDidMount() {
-    fetch('https://jsonplaceholder.typicode.com/users')
-      .then(response => response.json())
-      .then(users => this.setState({ robots: users }));
+    this.props.onRequestRobots();
   }
   // useEffect(() => {
   //   fetch('https://jsonplaceholder.typicode.com/users')
@@ -47,8 +49,7 @@ class App extends React.Component {
   // };
 
   render() {
-    const { robots } = this.state;
-    const { searchField, onSearchChange } = this.props;
+    const { searchField, onSearchChange, robots } = this.props;
     const filteredRobots = robots.filter(robot => {
       return robot.name.toLowerCase().includes(searchField.toLowerCase());
     });
