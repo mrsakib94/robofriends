@@ -4,11 +4,20 @@ import App from './containers/App';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import { searchRobots } from './reducers';
+import { createLogger } from 'redux-logger';
+
+const logger = createLogger();
+const store = createStore(searchRobots, applyMiddleware(logger));
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>
 );
 
