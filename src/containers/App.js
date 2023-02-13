@@ -37,6 +37,7 @@ class App extends React.Component {
   componentDidMount() {
     this.props.onRequestRobots();
   }
+
   // useEffect(() => {
   //   fetch('https://jsonplaceholder.typicode.com/users')
   //     .then(response => response.json())
@@ -49,7 +50,7 @@ class App extends React.Component {
   // };
 
   render() {
-    const { searchField, onSearchChange, robots } = this.props;
+    const { onSearchChange, robots, searchField } = this.props;
     const filteredRobots = robots.filter(robot => {
       return robot.name.toLowerCase().includes(searchField.toLowerCase());
     });
