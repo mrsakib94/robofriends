@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CounterButton correnctly increments the counter 1`] = `
+<button
+  color="red"
+  id="counter"
+  onClick={[Function]}
+>
+  Count: 
+  0
+</button>
+`;
+
+exports[`CounterButton renders without crashing 1`] = `
+<button
+  color="red"
+  id="counter"
+  onClick={[Function]}
+>
+  Count: 
+  0
+</button>
+`;
