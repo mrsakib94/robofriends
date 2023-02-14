@@ -24,7 +24,7 @@ export const requestRobots = () => (dispatch) => {
     });
 }
 
-export const setSearchfield = (text) => ({
+export const setSearchField = (text) => ({
   type: CHANGE_SEARCH_FIELD,
   payload: text,
 })
